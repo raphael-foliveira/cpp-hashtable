@@ -6,12 +6,18 @@ class HashTable {
 private:
     Node** arr;
 
+    int length;
+
     int hash(const char* key);
 
     bool checkConflict(int hashKey);
 
 public:
     HashTable();
+
+    ~HashTable();
+
+    HashTable(const HashTable& other);
 
     void put(const char* key, int value);
 

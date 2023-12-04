@@ -10,6 +10,10 @@ private:
 public:
     Node(const char* key, int value);
 
+    ~Node();
+
+    Node(const Node& other);
+
     const char* getKey();
 
     void setKey(const char* newKey);
