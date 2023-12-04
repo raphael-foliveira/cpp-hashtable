@@ -5,7 +5,17 @@
 
 int TABLE_SIZE = 10;
 
-HashTable::HashTable() : arr(new Node* [TABLE_SIZE]) {}
+HashTable::HashTable() : arr(new Node* [TABLE_SIZE]), length(TABLE_SIZE) {}
+
+HashTable::~HashTable() {
+    delete[] arr;
+}
+
+HashTable::HashTable(const HashTable& other) {
+    for (int i = 0; i < other.length; i++) {
+        arr[i] = other.arr[i];
+    }
+}
 
 int HashTable::hash(const char* key) {
     int sum = 0;

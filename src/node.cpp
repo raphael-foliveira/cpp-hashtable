@@ -2,6 +2,15 @@
 
 Node::Node(const char* key, int val) : key(key), value(val), next(nullptr) {}
 
+Node::~Node() {
+    if (next != nullptr) {
+        delete next;
+    }
+    delete key;
+}
+
+Node::Node(const Node& other) {}
+
 const char* Node::getKey() {
     return key;
 }
