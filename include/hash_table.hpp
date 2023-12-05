@@ -10,8 +10,6 @@ private:
 
     int hash(const char* key);
 
-    bool checkConflict(int hashKey);
-
 public:
     HashTable();
 
