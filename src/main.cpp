@@ -20,5 +20,6 @@ int main() {
     if (hashTable.get("bar", bar)) {
         std::cout << bar << "\n";
     }
+
     return 0;
 }

@@ -19,6 +19,8 @@ public:
 
     HashTable(const HashTable& other);
 
+    HashTable& operator=(const HashTable& rhs);
+
     void put(const char* key, int value);
 
     bool get(const char* key, int& target);

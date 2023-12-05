@@ -13,8 +13,21 @@ HashTable::~HashTable() {
 
 HashTable::HashTable(const HashTable& other) {
     for (int i = 0; i < other.length; i++) {
-        arr[i] = other.arr[i];
+        if (other.arr[i] != nullptr) {
+            arr[i] = new Node(*other.arr[i]);
+        }
     }
+}
+
+HashTable& HashTable::operator=(const HashTable& rhs) {
+    if (this != &rhs) {
+        for (int i = 0; i < rhs.length; i++) {
+            if (rhs.arr[i] != nullptr) {
+                arr[i] = new Node(*rhs.arr[i]);
+            }
+        }
+    }
+    return *this;
 }
 
 int HashTable::hash(const char* key) {
