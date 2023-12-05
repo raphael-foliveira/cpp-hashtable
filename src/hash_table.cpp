@@ -50,11 +50,6 @@ bool HashTable::exists(const char* key) {
     return false;
 }
 
-bool HashTable::checkConflict(int hashKey) {
-    Node* node = arr[hashKey];
-    return node != nullptr;
-}
-
 bool HashTable::get(const char* key, int& target) {
     int hashKey = hash(key);
     Node* node = arr[hashKey];
@@ -71,7 +66,7 @@ bool HashTable::get(const char* key, int& target) {
 void HashTable::put(const char* key, int value) {
     Node* node = new Node(key, value);
     int hashKey = hash(key);
-    if (!checkConflict(hashKey)) {
+    if (arr[hashKey] == nullptr) {
         arr[hashKey] = node;
         return;
     }
