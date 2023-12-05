@@ -19,11 +19,13 @@ public:
 
     HashTable& operator=(const HashTable& rhs);
 
+    bool exists(const char* key);
+
     void put(const char* key, int value);
 
     bool get(const char* key, int& target);
 
-    bool exists(const char* key);
+    bool remove(const char* key);
 };
 
 

@@ -11,6 +11,9 @@ int main() {
     int foo;
     int fii;
     int bar;
+
+    bool result = hashTable.remove("foo");
+    std::cout << result << "\n";
     if (hashTable.get("foo", foo)) {
         std::cout << foo << "\n";
     }

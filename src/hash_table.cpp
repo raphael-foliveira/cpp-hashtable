@@ -77,3 +77,26 @@ void HashTable::put(const char* key, int value) {
     current->setNext(node);
 }
 
+bool HashTable::remove(const char* key) {
+    int hashKey = hash(key);
+    Node* node = arr[hashKey];
+    if (node == nullptr) {
+        return false;
+    }
+    if (node->getKey() == key) {
+        std::cout << "found: " << key << "\n";
+        arr[hashKey] = node->getNext();
+        return true;
+    }
+    while (node->getNext() != nullptr) {
+        if (node->getNext()->getKey() == key) {
+            std::cout << "found: " << key << "\n";
+            Node* temp = node->getNext();
+            node->setNext(temp->getNext());
+            delete temp;
+            return true;
+        }
+        node = node->getNext();
+    }
+    return false;
+}
