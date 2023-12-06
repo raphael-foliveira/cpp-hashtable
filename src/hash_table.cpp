@@ -13,8 +13,21 @@ HashTable::~HashTable() {
 
 HashTable::HashTable(const HashTable& other) {
     for (int i = 0; i < other.length; i++) {
-        arr[i] = other.arr[i];
+        if (other.arr[i] != nullptr) {
+            arr[i] = new Node(*other.arr[i]);
+        }
     }
+}
+
+HashTable& HashTable::operator=(const HashTable& rhs) {
+    if (this != &rhs) {
+        for (int i = 0; i < rhs.length; i++) {
+            if (rhs.arr[i] != nullptr) {
+                arr[i] = new Node(*rhs.arr[i]);
+            }
+        }
+    }
+    return *this;
 }
 
 int HashTable::hash(const char* key) {
@@ -37,11 +50,6 @@ bool HashTable::exists(const char* key) {
     return false;
 }
 
-bool HashTable::checkConflict(int hashKey) {
-    Node* node = arr[hashKey];
-    return node != nullptr;
-}
-
 bool HashTable::get(const char* key, int& target) {
     int hashKey = hash(key);
     Node* node = arr[hashKey];
@@ -58,7 +66,7 @@ bool HashTable::get(const char* key, int& target) {
 void HashTable::put(const char* key, int value) {
     Node* node = new Node(key, value);
     int hashKey = hash(key);
-    if (!checkConflict(hashKey)) {
+    if (arr[hashKey] == nullptr) {
         arr[hashKey] = node;
         return;
     }
@@ -69,3 +77,26 @@ void HashTable::put(const char* key, int value) {
     current->setNext(node);
 }
 
+bool HashTable::remove(const char* key) {
+    int hashKey = hash(key);
+    Node* node = arr[hashKey];
+    if (node == nullptr) {
+        return false;
+    }
+    if (node->getKey() == key) {
+        std::cout << "found: " << key << "\n";
+        arr[hashKey] = node->getNext();
+        return true;
+    }
+    while (node->getNext() != nullptr) {
+        if (node->getNext()->getKey() == key) {
+            std::cout << "found: " << key << "\n";
+            Node* temp = node->getNext();
+            node->setNext(temp->getNext());
+            delete temp;
+            return true;
+        }
+        node = node->getNext();
+    }
+    return false;
+}

@@ -10,8 +10,6 @@ private:
 
     int hash(const char* key);
 
-    bool checkConflict(int hashKey);
-
 public:
     HashTable();
 
@@ -19,11 +17,15 @@ public:
 
     HashTable(const HashTable& other);
 
+    HashTable& operator=(const HashTable& rhs);
+
+    bool exists(const char* key);
+
     void put(const char* key, int value);
 
     bool get(const char* key, int& target);
 
-    bool exists(const char* key);
+    bool remove(const char* key);
 };
 
 

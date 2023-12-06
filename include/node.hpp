@@ -14,6 +14,8 @@ public:
 
     Node(const Node& other);
 
+    Node& operator=(const Node& rhs);
+
     const char* getKey();
 
     void setKey(const char* newKey);
