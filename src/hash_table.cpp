@@ -49,12 +49,12 @@ bool HashTable::exists(const char* key) {
     return false;
 }
 
-bool HashTable::get(const char* key, int& target) {
+bool HashTable::get(const char* key, int& dest) {
     int hashKey = hash(key);
     Node* node = arr[hashKey];
     while (node != nullptr) {
         if (node->getKey() == key) {
-            target = node->getValue();
+            dest = node->getValue();
             return true;
         }
         node = node->getNext();
