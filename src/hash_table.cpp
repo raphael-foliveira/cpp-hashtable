@@ -1,6 +1,5 @@
 #include "../include/hash_table.hpp"
 #include "../include/node.hpp"
-#include <iostream>
 #include "string.h"
 
 int TABLE_SIZE = 10;
@@ -84,13 +83,11 @@ bool HashTable::remove(const char* key) {
         return false;
     }
     if (node->getKey() == key) {
-        std::cout << "found: " << key << "\n";
         arr[hashKey] = node->getNext();
         return true;
     }
     while (node->getNext() != nullptr) {
         if (node->getNext()->getKey() == key) {
-            std::cout << "found: " << key << "\n";
             Node* temp = node->getNext();
             node->setNext(temp->getNext());
             delete temp;
